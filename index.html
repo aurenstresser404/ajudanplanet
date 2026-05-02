@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eksplorasi Planet</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at 20% 30%, #020111, #000000, #010a2a);
+    font-family: 'Segoe UI', 'Poppins', Arial, sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.header {
+    padding: 30px 20px 10px;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #ffd89b, #c7e9fb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.sub {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(12, 20, 35, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 36px;
+    padding: 25px 18px 30px;
+    width: 270px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    background: rgba(20, 35, 60, 0.8);
+    border-color: #00a6ff;
+    box-shadow: 0 25px 40px -5px rgba(0,166,255,0.3);
+}
+
+/* GAMBAR PLANET (ASLI) - di ATAS nama */
+.planet-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 3px rgba(255,215,0,0.3), 0 0 0 8px rgba(0,0,0,0.2), 0 15px 30px rgba(0,0,0,0.5);
+    transition: all 0.2s;
+    animation: orbitRotate 14s linear infinite;
+    background-color: #1a1a2e; /* fallback warna gelap */
+}
+
+.planet-img:hover {
+    animation-play-state: paused;
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px gold, 0 0 0 12px rgba(0,0,0,0.3);
+}
+
+/* URL GAMBAR ASLI DARI NASA & WIKIMEDIA (DIPASTIKAN AKTIF) */
+.planet-img.merkurius {
+    background-image: url('https://science.nasa.gov/wp-content/uploads/2023/09/mercury-480x480.jpg?w=480');
+}
+
+.planet-img.venus {
+    background-image: url('https://science.nasa.gov/wp-content/uploads/2023/09/venus-480x480.jpg?w=480');
+}
+
+.planet-img.bumi {
+    background-image: url('https://science.nasa.gov/wp-content/uploads/2023/09/earth-480x480.jpg?w=480');
+}
+
+.planet-img.mars {
+    background-image: url('https://science.nasa.gov/wp-content/uploads/2023/09/mars-480x480.jpg?w=480');
+}
+
+/* Jika gambar dari NASA gagal (misal koneksi terbatas), fallback ke Wikimedia yang juga andal */
+.planet-img.merkurius {
+    background-image: url('https://b.top4top.io/p_37740obrp0.jpeg'), 
+                      url('https://science.nasa.gov/wp-content/uploads/2023/09/mercury-480x480.jpg?w=480');
+}
+
+.planet-img.bumi {
+    background-image: url('https://j.top4top.io/p_3774btses0.jpeg'),
+                      url('https://science.nasa.gov/wp-content/uploads/2023/09/earth-480x480.jpg?w=480');
+}
+
+/* Venus & Mars juga ganda */
+.planet-img.venus {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg'),
+                      url('https://science.nasa.gov/wp-content/uploads/2023/09/venus-480x480.jpg?w=480');
+}
+
+.planet-img.mars {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0c/Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png'),
+                      url('https://science.nasa.gov/wp-content/uploads/2023/09/mars-480x480.jpg?w=480');
+}
+
+@keyframes orbitRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.card h2 {
+    font-size: 30px;
+    margin: 5px 0 12px;
+    font-weight: 700;
+    background: linear-gradient(120deg, #f0f9ff, #b9e2ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 1px;
+}
+
+.fakta-btn {
+    background: linear-gradient(95deg, #0077ff, #00c3ff);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+    box-shadow: 0 4px 12px rgba(0,160,255,0.3);
+}
+
+.fakta-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(95deg, #0066dd, #00aaff);
+    box-shadow: 0 6px 16px rgba(0,160,255,0.5);
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: inline-block;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 700px) {
+    .planet-img {
+        width: 120px;
+        height: 120px;
+    }
+    .card {
+        width: 240px;
+        padding: 20px 12px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🌠 EKSPLORASI PLANET 🌍</h1>
+    <div class="sub">Gambar asli dari Eksplorasi Planet</div>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="planet-img merkurius"></div>
+        <h2>Merkurius</h2>
+        <button class="fakta-btn" onclick="infoPlanet('Merkurius adalah planet terdekat Matahari. Permukaannya penuh kawah dan suhu ekstrem: 430°C siang, -180°C malam.')">🔭 Lihat Fakta</button>
+    </div>
+
+    <div class="card">
+        <div class="planet-img venus"></div>
+        <h2>Venus</h2>
+        <button class="fakta-btn" onclick="infoPlanet('Venus merupakan planet terpanas (hingga 470°C). Atmosfer tebal CO₂ menyebabkan efek rumah kaca dahsyat.')">🔭 Lihat Fakta</button>
+    </div>
+
+    <div class="card">
+        <div class="planet-img bumi"></div>
+        <h2>Bumi</h2>
+        <button class="fakta-btn" onclick="infoPlanet('Bumi adalah satu-satunya planet dengan kehidupan. 71% lautan, atmosfer pelindung, dan bulan alami.')">🔭 Lihat Fakta</button>
+    </div>
+
+    <div class="card">
+        <div class="planet-img mars"></div>
+        <h2>Mars</h2>
+        <button class="fakta-btn" onclick="infoPlanet('Planet Merah memiliki gunung tertinggi di tata surya (Olympus Mons, 21 km). Warna merah dari karat.')">🔭 Lihat Fakta</button>
+    </div>
+</div>
+
+<footer>
+    ©PEMBUAT 2026-02-05 | @Ajudan02
+</footer>
+
+<script>
+function infoPlanet(pesan) {
+    alert(pesan);
+}
+</script>
+
+</body>
+</html>
